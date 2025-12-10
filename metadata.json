@@ -1,0 +1,5 @@
+{
+  "name": "10년 후 전공 분야 직업 시장 예측",
+  "description": "파일과 텍스트를 기반으로, 특정 전공 분야의 10년 후 취업률과 AI로 인한 직업 대체율을 예측합니다.",
+  "requestFramePermissions": []
+}
