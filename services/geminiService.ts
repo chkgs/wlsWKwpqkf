@@ -9,12 +9,8 @@ export const getJobMarketPrediction = async (
   userInput: string,
   files: FilePart[]
 ): Promise<string> => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) {
-    throw new Error("API key is not configured. Please set the API_KEY environment variable.");
-  }
-
-  const ai = new GoogleGenAI({ apiKey });
+  // API key is obtained exclusively from the environment variable process.env.API_KEY
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const model = 'gemini-2.5-flash';
 
   const promptIntro = userInput
