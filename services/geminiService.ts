@@ -9,8 +9,15 @@ export const getJobMarketPrediction = async (
   userInput: string,
   files: FilePart[]
 ): Promise<string> => {
-  // API key is obtained exclusively from the environment variable process.env.API_KEY
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // URL 쿼리 파라미터에서 API 키를 우선적으로 확인 (예: ?key=AIza...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const apiKey = urlParams.get('key') || urlParams.get('apiKey') || process.env.API_KEY;
+
+  if (!apiKey) {
+    throw new Error("API 키가 확인되지 않았습니다. 도메인 주소에 ?key=API_KEY 형식으로 추가하거나 환경 변수를 확인해주세요.");
+  }
+
+  const ai = new GoogleGenAI({ apiKey: apiKey });
   const model = 'gemini-2.5-flash';
 
   const promptIntro = userInput
